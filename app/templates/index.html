@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="POST">
-	{% csrf_token %}
-	<table>
-		{{ form }}
-	</table>
-	<input type="submit" value="send">
-</form>
-{% if model.count > 0 %}
-<hr>
+{% if persons.count > 0 %}
+<table>
+	<thread>
+		<tr>
+			<th>id</th>
+			<th>Name</th>
+			<th>Age</th>
+		</tr>
+	</thread>
+	{% for person in persons %}
+	<tr>
+		<td>{{ person.id }}</td>
+		<td>{{ person.name }}</td>
+		<td>{{ person.age }}</td>
+		<td><a href="update/{{ person.id }}">Update</a> | <a href="delete/{{ person.id }}">Delete</a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
 {% endif %}
+<a href="create/">Create</a>
 {% endblock content %}
